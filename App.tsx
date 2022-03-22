@@ -8,7 +8,7 @@
  * @format
  */
 
-import React from 'react';
+import React, {useEffect} from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -17,6 +17,9 @@ import {
   Text,
   useColorScheme,
   View,
+  Keyboard,
+  Alert,
+  TextInput,
 } from 'react-native';
 
 import {
@@ -62,6 +65,31 @@ const App = () => {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
 
+  useEffect(() => {
+    Keyboard.addListener('keyboardDidShow', (e) => {
+      Alert.alert(
+        'keyboardDid --> Show',
+        'keyboard height: ' + e.endCoordinates.height,
+        [
+          {
+            text: 'Cancel',
+          },
+        ]
+      );
+    });
+    Keyboard.addListener('keyboardDidHide', (e) => {
+      Alert.alert(
+        'keyboardDid --> Hide',
+        'keyboard height: ' + e.endCoordinates.height,
+        [
+          {
+            text: 'Cancel',
+          },
+        ]
+      );
+    });
+  }, []);
+
   return (
     <SafeAreaView style={backgroundStyle}>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
@@ -73,6 +101,7 @@ const App = () => {
           style={{
             backgroundColor: isDarkMode ? Colors.black : Colors.white,
           }}>
+          <TextInput />
           <Section title="Step One">
             Edit <Text style={styles.highlight}>App.tsx</Text> to change this
             screen and then come back to see your edits.
