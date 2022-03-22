@@ -21,6 +21,7 @@ import {
   Alert,
   TextInput,
 } from 'react-native';
+import ExtraDimensions from 'react-native-extra-dimensions-android';
 
 import {
   Colors,
@@ -118,6 +119,7 @@ const App = () => {
           <LearnMoreLinks />
         </View>
       </ScrollView>
+      <View style={styles.badContainer} />
     </SafeAreaView>
   );
 };
@@ -138,6 +140,10 @@ const styles = StyleSheet.create({
   },
   highlight: {
     fontWeight: '700',
+  },
+  badContainer: {
+    ...StyleSheet.absoluteFillObject,
+    height: ExtraDimensions.get('REAL_WINDOW_HEIGHT'),
   },
 });
 
